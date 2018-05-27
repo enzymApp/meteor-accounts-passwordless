@@ -1,14 +1,15 @@
 Package.describe({
-  name: 'acemtp:accounts-passwordless',
-  version: '0.2.3',
+  name: 'enzym:accounts-passwordless',
+  version: '0.2.4',
   summary: 'Token-based one-time password (OTPW) authentication (nopassword, passwordless)',
   git: 'https://github.com/efounders/meteor-accounts-passwordless',
   documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('METEOR@0.9.2');
+  api.versionsFrom('METEOR@1.6.1');
 
+  api.use('ecmascript')
   api.use(['tracker', 'underscore', 'templating', 'session'], 'client');
   api.use('email', 'server');
   api.use(['accounts-base', 'check'], ['client', 'server']);
@@ -18,6 +19,8 @@ Package.onUse(function(api) {
 
   api.use(['random', 'jperl:match-ex@1.0.0'], 'server');
 
-  api.addFiles(['accounts-passwordless-ui.html', 'accounts-passwordless-ui.js'], 'client');
-  api.addFiles('accounts-passwordless.js');
+  api.addFiles('templates.html', 'client');
+
+  api.mainModule('passwordless-server.js', 'server')
+  api.mainModule('passwordless-client.js', 'client')
 });
