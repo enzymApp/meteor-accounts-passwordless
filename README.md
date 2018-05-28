@@ -1,6 +1,9 @@
 # meteor-accounts-passwordless
 
-Passwords are broken. Passwordless is an open source Meteor package for token-based one-time password (OTPW) authentication, which is faster to deploy, better for your users, and more secure.
+Passwordless is an open source Meteor package for token-based one-time password (OTPW) and url-based authentication.
+Ported to Meteor 1.6 and React 16 (may work with older versions)
+Based on acemtp awesome work.
+
 
 ## Install
 
@@ -8,10 +11,22 @@ Passwords are broken. Passwordless is an open source Meteor package for token-ba
 meteor add acemtp:accounts-passwordless
 ```
 
+## Configuration
+
+Configuration is done overwriting the default values in object Accounts.passwordless.
+
+```javascript
+Accounts.passwordless = {
+  config: {},               // defined in /passwordless-client.js
+  emailTemplates: {}        // defined in /lib/server/emailTemplates.js
+}
+```
+
 ## Usage
 
-
 You have 2 ways to use it, the highlevel that use the default ui or the low level to plug on your own application.
+
+Not sure the default UI mode is still working fine: we only use React.
 
 ### Default UI
 
@@ -45,6 +60,12 @@ That's all you need to log in a user with passwordless.
 
 You don't have to call this function. It's just an utility function to set the username of the logged user, in case you don't want to display the user email.
 
+#### withEmailValidation : React High Order Component
+
+Simple optional helper to get the parameters from route, call Meteor.loginWithPasswordless and display component based on status (loading, success, failure).
+For the url-based validation only.
+
+
 #### Workflow
 
 Here is the minimal workflow you have to implement:
@@ -55,67 +76,21 @@ Here is the minimal workflow you have to implement:
 - call `Meteor.loginWithPasswordless` with the verification code
 - the user is logged
 
+
+For the url-based validation:
+
+- ...
+- user clicks on the link
+- it opens a new page calling Meteor.loginWithPasswordless (withEmailValidation could be used to do this automatically)
+- the user is logged
+- *special bonus:* the previous session (where he set his email) is also logged! Useful when first form is fullfilled in the desktop browser and email is received on the mobile phone.
+
 Some optional extra steps:
 
 - (optional) ask the user his username and call `Meteor.setUsername` with the value given by the user
 - (optional) call `Meteor.logout()` to logout the user
 
-#### Set a link in the email
 
-To set a link inside the email you can modifier the `emailTemplates` object to use custom texte and so add a link. Below you get an example:
-
-```javascript
-Meteor.startup(function () {
-
-  Accounts.passwordless.emailTemplates.sendVerificationCode = {
-    subject: function (code) {
-      return "Your verification code is " + code + " for " + Accounts.passwordless.emailTemplates.siteName;
-    },
-    text: function (user, code, selector, options) {
-
-      var greeting = (user && user.username) ? ("Hello " + user.username + ",") : "Hello,";
-
-      var loginURL = Meteor.absoluteUrl().replace(/^https?:\/\//, '').replace(/\/$/, '') + '/login/';
-      loginURL += encodeURIComponent(selector) + '/' + code;
-
-      if (options && options.length == 2) {
-        // options come from client and must be checked
-        check(options[0], String);
-        check(options[1], String);
-        loginURL +=  '/' + options[0] + '/' + options[1];
-      }
-
-      return greeting + "\n"
-        + "\n"
-        + "Your verification code is " + code + ".\n"
-        + "You can login directly by clicking this <a href='" + loginURL + "'>link</a>\n"
-        + "\n"
-        + "Thanks.\n";
-    }
-  };
-});
-```
-
-After you have to set a root to get email/username and code, to login the user. Look example code below for an example with iron:router
-
-```
-Router.route('/login/:selector/:code', function () {
-  //
-  var options = {
-    code: this.params.code,
-    selector: decodeURIComponent(this.params.selector)
-  };
-  
-  Meteor.loginWithPasswordless(options, function (error, result) {
-      if (error) {
-        console.error(error);
-      } else {
-        // redirect user to your main page.
-        Router.go('dashboard');
-      }
-    });
-});
-```
 
 ### Test the example locally on your computer
 

@@ -4,6 +4,7 @@ import {PasswordlessCodes}   from './lib/common/PasswordlessCodes'
 import loginWithPasswordless from './lib/client/loginWithPasswordless'
 import sendVerificationCode  from './lib/client/sendVerificationCode'
 import setUsername           from './lib/client/setUsername'
+export withEmailValidation   from './lib/client/withEmailValidation'
 import './ui'
 
 Meteor.loginWithPasswordless = loginWithPasswordless
