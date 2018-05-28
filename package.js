@@ -15,11 +15,11 @@ Package.onUse(function(api) {
   api.use(['accounts-base', 'check'], ['client', 'server']);
 
   // Export Accounts (etc) to packages using this one.
-  api.imply('accounts-base', ['client', 'server']);
+  api.imply('accounts-base', ['client', 'server'])
 
-  api.use(['random', 'jperl:match-ex@1.0.0'], 'server');
+  api.use(['random', 'jperl:match-ex@1.0.0'], 'server')
 
-  api.addFiles('templates.html', 'client');
+  api.addFiles('templates.html', 'client')
 
   api.mainModule('passwordless-server.js', 'server')
   api.mainModule('passwordless-client.js', 'client')

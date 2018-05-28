@@ -1,4 +1,5 @@
 import {Accounts} from 'meteor/accounts-base'
+import {Meteor}   from 'meteor/meteor'
 
 import emailTemplates       from './lib/server/emailTemplates'
 import loginHandler         from './lib/server/loginHandler'
@@ -10,8 +11,14 @@ import './lib/server/publications'
 
 Accounts.registerLoginHandler('passwordless', loginHandler)
 
+const defaultConfig = {
+  codeType:            'digits',
+  validationRoutePath: '/validation'
+}
+
 Accounts.passwordless = {
-  emailTemplates,
   sendVerificationCode,
+  emailTemplates,
   verifyCode,
+  config: defaultConfig,
 }
