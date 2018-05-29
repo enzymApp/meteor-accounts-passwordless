@@ -42,11 +42,13 @@ If the default layout doesn't fit your needs, you can call the low level api. Yo
 
 Basically, there're 3 methods you have to call on the client:
 
-#### Meteor.sendVerificationCode(selector, callback)
+#### Meteor.sendVerificationCode(selector, options, callback)
 
 Call this one will send the verification code to the user.
 
 The `selector` can be the email of the user or his username. If you pass the username, the accounts must already exists to find the associate email and send the email.
+
+The `options` is an object that could contain `username` and `profile` that would be set in Meteor.users after user creation. Be aware that profile content must be considered as non safe and fully editable by the corresponding user.
 
 The callback has 2 parameters, `error` and `result`.
 
