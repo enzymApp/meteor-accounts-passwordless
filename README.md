@@ -67,6 +67,10 @@ You don't have to call this function. It's just an utility function to set the u
 Simple optional helper to get the parameters from route, call Meteor.loginWithPasswordless and display component based on status (loading, success, failure).
 For the url-based validation only.
 
+#### handleClientIpAddress(profile, clientIpAddress)
+
+Callback you could define to do something with the client IP address and the user's future profile. Must return the profile that will be saved on user creation.
+
 
 #### Workflow
 
