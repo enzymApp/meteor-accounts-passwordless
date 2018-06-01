@@ -17,7 +17,12 @@ Configuration is done overwriting the default values in object Accounts.password
 
 ```javascript
 Accounts.passwordless = {
-  config: {},               // defined in /passwordless-client.js
+  config: {                 // defined in /passwordless-client.js
+    codeType:            'digits',
+    validationRoutePath: '/validation',
+    emailFrom:           'Meteor Accounts <no-reply@meteor.com>',
+    tokenLifeTime:       15 * 60,
+  }
   emailTemplates: {}        // defined in /lib/server/emailTemplates.js
 }
 ```

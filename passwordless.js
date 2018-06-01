@@ -16,6 +16,7 @@ const defaultConfig = {
   codeType:            'digits',
   validationRoutePath: '/validation',
   emailFrom:           'Meteor Accounts <no-reply@meteor.com>',
+  tokenLifeTime:       15 * 60,
 }
 
 Accounts.passwordless = {
