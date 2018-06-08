@@ -23,4 +23,5 @@ Accounts.passwordless = {
   sendVerificationCode,
   emailTemplates,
   config: defaultConfig,
+  onSendVerificationCode: () => {},
 }

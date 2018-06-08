@@ -22,13 +22,11 @@ Tracker.autorun(function (computation) {
 
   PasswordlessCodes.find({ticket})
   .forEach(item => {
-    console.log(item)
     const {code} = item
 
     computation.stop()
 
     Session.set('accounts-passwordless.ticket', '')
-
     Meteor.loginWithPasswordless({code}, (err, result) => {
       if(err) console.error(err)
       console.log(result)
