@@ -11,7 +11,7 @@ Package.onUse(function(api) {
 
   api.use(['ecmascript', 'tmeasday:check-npm-versions@0.3.2'])
   api.use([
-    'tracker', 'underscore', 'templating@1.3.2', 'session', 'u2622:persistent-session'
+    'tracker', 'underscore', 'templating@1.3.2', 'session', 'u2622:persistent-session@0.4.4'
   ], 'client')
   api.use('email', 'server')
   api.use(['accounts-base', 'check'], ['client', 'server'])
