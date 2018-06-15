@@ -1,5 +1,6 @@
 import {Accounts}         from 'meteor/accounts-base'
 import {Meteor}           from 'meteor/meteor'
+import {Session}          from 'meteor/session'
 
 import loginWithPasswordless from './lib/client/loginWithPasswordless'
 import sendVerificationCode  from './lib/client/sendVerificationCode'
@@ -25,8 +26,8 @@ Tracker.autorun(function (computation) {
     const {code} = item
 
     computation.stop()
+    Session.setPersistent('accounts-passwordless.ticket', '')
 
-    Session.set('accounts-passwordless.ticket', '')
     Meteor.loginWithPasswordless({code}, (err, result) => {
       if(err) console.error(err)
       console.log(result)

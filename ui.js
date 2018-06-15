@@ -1,3 +1,5 @@
+import {Session} from 'meteor/session'
+
 // set to false to skip the form asking the username
 var loginPasswordlessAskUsername = true;
 
