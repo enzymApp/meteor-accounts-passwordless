@@ -12,5 +12,3 @@ import './passwordless'
 Accounts.registerLoginHandler('passwordless', loginHandler)
 
 Accounts.passwordless.verifyCode = verifyCode
-
-Accounts.passwordless.handleClientIpAddress = () => {}
