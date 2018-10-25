@@ -1,6 +1,6 @@
 Package.describe({
   name: 'enzymapp:accounts-passwordless',
-  version: '0.3.9',
+  version: '0.3.10',
   summary: 'Token-based one-time password (OTPW) authentication (nopassword, passwordless)',
   git: 'https://github.com/enzymapp/meteor-accounts-passwordless',
   documentation: 'README.md'
@@ -11,7 +11,7 @@ Package.onUse(function(api) {
 
   api.use(['ecmascript', 'tmeasday:check-npm-versions@0.3.2'])
   api.use([
-    'tracker', 'templating@1.3.2', 'session', 'cultofcoders:persistent-session'
+    'tracker', 'templating@1.3.2', 'session', 'cultofcoders:persistent-session@0.4.5'
   ], 'client')
   api.use('email', 'server')
   api.use(['accounts-base', 'check'], ['client', 'server'])
