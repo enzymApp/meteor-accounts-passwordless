@@ -5,6 +5,11 @@ Ported to Meteor 1.6 and React 16 (may work with older versions)
 Based on acemtp awesome work.
 
 
+## Changelog
+
+- 0.4: add support for HTML emails
+
+
 ## Install
 
 ```
@@ -23,7 +28,7 @@ Accounts.passwordless = {
     emailFrom:           'Meteor Accounts <no-reply@meteor.com>',
     tokenLifeTime:       15 * 60,
   }
-  emailTemplates: {}        // defined in /lib/server/emailTemplates.js
+  emailTemplates: {}        // default templates in /lib/server/emailTemplates.js
 }
 ```
 

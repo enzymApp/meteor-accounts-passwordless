@@ -1,6 +1,6 @@
 Package.describe({
   name: 'enzymapp:accounts-passwordless',
-  version: '0.4.0',
+  version: '0.4.1',
   summary: 'Token-based one-time password (OTPW) authentication (nopassword, passwordless)',
   git: 'https://github.com/enzymapp/meteor-accounts-passwordless',
   documentation: 'README.md'
